@@ -10,7 +10,7 @@ namespace REST_API_CV_Hantering.Endpoints
             // Uppdatera en befintlig person
             app.MapPut("/api/personer/{id:int}", async (
                 int id, 
-                Person updatedPerson, 
+                Person uppdateradPerson, 
                 ApplicationDbContext context) =>
             {
                 var person = await context.Personer.FindAsync(id);
@@ -19,13 +19,13 @@ namespace REST_API_CV_Hantering.Endpoints
                     return Results.NotFound();
                 }
 
-                if (string.IsNullOrWhiteSpace(updatedPerson.Namn))
+                if (string.IsNullOrWhiteSpace(uppdateradPerson.Namn))
                 {
                     return Results.BadRequest("Namn är obligatoriskt.");
                 }
-                person.Namn = updatedPerson.Namn;
-                person.Beskrivning = updatedPerson.Beskrivning;
-                person.Kontaktuppgifter = updatedPerson.Kontaktuppgifter;
+                person.Namn = uppdateradPerson.Namn;
+                person.Beskrivning = uppdateradPerson.Beskrivning;
+                person.Kontaktuppgifter = uppdateradPerson.Kontaktuppgifter;
                 await context.SaveChangesAsync();
                 return Results.Ok(person);
             });
