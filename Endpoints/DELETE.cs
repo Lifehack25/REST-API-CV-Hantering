@@ -35,12 +35,12 @@ namespace REST_API_CV_Hantering.Endpoints
             // Ta bort en arbetslivserfarenhet
             app.MapDelete("/api/arbetslivserfarenheter/{id:int}", async (int id, ApplicationDbContext context) =>
             {
-                var workExp = await context.Arbetserfarenheter.FindAsync(id);
-                if (workExp is null)
+                var arbetsErf = await context.Arbetserfarenheter.FindAsync(id);
+                if (arbetsErf is null)
                 {
                     return Results.NotFound();
                 }
-                context.Arbetserfarenheter.Remove(workExp);
+                context.Arbetserfarenheter.Remove(arbetsErf);
                 await context.SaveChangesAsync();
                 return Results.NoContent();
             });

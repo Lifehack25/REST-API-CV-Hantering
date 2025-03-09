@@ -43,6 +43,11 @@ namespace REST_API_CV_Hantering.Endpoints
                     PropertyNameCaseInsensitive = true
                 });
 
+                if (repos is null)
+                {
+                    return Results.NotFound("Inga repos hittades för användaren.");
+                }
+
                 // Mappa till DTO
                 var result = repos.Select(r => new GitHubRepoDto
                 {
